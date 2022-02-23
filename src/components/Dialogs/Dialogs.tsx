@@ -24,28 +24,29 @@ const Message: React.FC<MessageType> = (props) => {
 
 const Dialogs = () => {
 
-    let dialogsData = [
+    let dialogs = [
         {id: 1, name: 'Vlad'},
         {id: 2, name: 'Leontiev'},
         {id: 3, name: 'Bevkin'}
     ]
 
-    let messagesData = [
+    let messages = [
         {id: 1, message: "Hi"},
         {id: 2, message: "How are you?"},
         {id: 3, message: "Yo"}
     ]
+
+    let dialogElements = dialogs.map(d => <DialogItem id={d.id} name={d.name}/>
+    );
+
+    let messagesElements = messages.map(message => <Message message={message.message}/>)
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItem}>
-                <DialogItem id={dialogsData[0].id} name={dialogsData[0].name}/>
-                <DialogItem id={dialogsData[1].id} name={dialogsData[1].name}/>
-                <DialogItem id={dialogsData[2].id} name={dialogsData[2].name}/>
+                {dialogElements}
             </div>
             <div className={s.messages}>
-                <Message message={messagesData[0].message}/>
-                <Message message={messagesData[1].message}/>
-                <Message message={messagesData[2].message}/>
+                {messagesElements}
             </div>
         </div>
     );
