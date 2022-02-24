@@ -1,12 +1,9 @@
 import React from "react";
 import s from './Post.module.css'
+import {PostsType} from "../../../../App";
 
-type PostType = {
-    message: string
-    likes: number
-}
 
-const Post: React.FC<PostType> = (props) => {
+export const Post: React.FC<PostsType> = (props) => {
     return (
         <div className={s.item}>
             <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg" />
@@ -16,4 +13,3 @@ const Post: React.FC<PostType> = (props) => {
     );
 };
 
-export default Post;

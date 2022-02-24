@@ -1,16 +1,18 @@
 import React from 'react';
 import s from './Profile.module.css';
-import MyPosts from "./MyPosts/MyPosts";
-import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
+import {MyPosts} from "./MyPosts/MyPosts";
+import {PropsType} from "../../App";
 
 
-const Profile = () => {
+
+export const  Profile = (props:PropsType) => {
+
     return (
         <div className={s.background}>
             <ProfileInfo/>
-            <MyPosts/>
+            <MyPosts posts={props.posts}/>
         </div>
     );
 };
 
-export default Profile;
