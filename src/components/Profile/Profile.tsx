@@ -2,11 +2,10 @@ import React from 'react';
 import s from './Profile.module.css';
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPosts} from "./MyPosts/MyPosts";
-import {PropsType} from "../../App";
+import {ProfilePageType} from "../../redux/state";
 
 
-
-export const  Profile = (props:PropsType) => {
+export const  Profile:React.FC<ProfilePageType> = (props) => {
 
     return (
         <div className={s.background}>

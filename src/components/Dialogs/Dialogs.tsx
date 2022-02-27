@@ -2,12 +2,10 @@ import React from 'react';
 import s from './Dialogs.module.css'
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DIalogItem/DialogItem";
-import {PropsType} from "../../App";
+import {DialogPageType} from "../../redux/state";
 
 
-
-
-export const Dialogs = (props:PropsType) => {
+export const Dialogs:React.FC<DialogPageType> = (props) => {
 
     // let dialogs = [
     //     {id: 1, name: 'Vlad'},
