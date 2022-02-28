@@ -18,7 +18,7 @@ function App(props:StateType) {
                 <div className='app-wrapper-content'>
                     <Routes>
                         <Route path="/dialogs/*" element={<Dialogs dialogs={props.state.dialogsPage.dialogs} messages={props.state.dialogsPage.messages}/>}/>
-                        <Route path="/profile" element={<Profile posts={props.state.profilePage.posts}/>}/>
+                        <Route path="/profile" element={<Profile posts={props.state.profilePage.posts} addPost={props.addPost}/>}/>
                     </Routes>
                 </div>
             </div>

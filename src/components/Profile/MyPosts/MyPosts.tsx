@@ -12,7 +12,7 @@ export const MyPosts:React.FC<ProfilePageType> = (props) => {
 
     let addPost =() => {
         let text = newPostElement.current!.value;   //TODO узнать на супорте про !
-        alert(text)
+        props.addPost(text)
     }
 
     return (
