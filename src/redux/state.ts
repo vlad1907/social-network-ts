@@ -1,3 +1,4 @@
+import {rerenderEntireTree} from "../render";
 
 export type StateType = {
     state:RootStateType
@@ -43,7 +44,7 @@ export let state:RootStateType = {
         posts: [
             {id: 1, message: "Hi dude", likesCount: 12},
             {id: 2, message: "Fuck you", likesCount: 11}
-        ]
+        ],
     },
     dialogsPage: {
         messages: [
@@ -69,6 +70,7 @@ export let addPost = (postMessage:string) => {
         likesCount:0
     }
     state.profilePage.posts.push(newPost)
+    rerenderEntireTree(state);
 }
 
 export default state

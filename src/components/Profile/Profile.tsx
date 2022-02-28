@@ -5,6 +5,7 @@ import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfilePageType} from "../../redux/state";
 
 
+
 export const  Profile:React.FC<ProfilePageType> = (props) => {
 
     return (

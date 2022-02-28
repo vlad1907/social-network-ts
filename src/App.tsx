@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Profile} from "./components/Profile/Profile";
@@ -11,7 +11,6 @@ import {StateType} from "./redux/state";
 function App(props:StateType) {
 
     return (
-        <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
                 <Navbar/>
@@ -22,7 +21,6 @@ function App(props:StateType) {
                     </Routes>
                 </div>
             </div>
-        </BrowserRouter>
     );
 }
 
