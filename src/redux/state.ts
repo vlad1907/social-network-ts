@@ -3,6 +3,7 @@ import {rerenderEntireTree} from "../render";
 export type StateType = {
     state:RootStateType
     addPost:(postMessage:string)=>void
+    updateNewPostText:(newText:string) =>void
 }
 
 export type MessageType = {
@@ -23,7 +24,9 @@ export type PostType = {
 
 export type ProfilePageType = {
     posts: Array<PostType>
+    newPostText:string
     addPost:(postMessage:string)=>void
+    updateNewPostText:(newText:string) =>void
 }
 
 export type DialogPageType = {
@@ -45,6 +48,7 @@ export let state:RootStateType = {
             {id: 1, message: "Hi dude", likesCount: 12},
             {id: 2, message: "Fuck you", likesCount: 11}
         ],
+        newPostText: 'some text'
     },
     dialogsPage: {
         messages: [
@@ -66,10 +70,16 @@ export let state:RootStateType = {
 export let addPost = (postMessage:string) => {
     let newPost:PostType = {
         id:5,
-        message:postMessage,
+        message: state.profilePage.newPostText,
         likesCount:0
     }
-    state.profilePage.posts.push(newPost)
+    state.profilePage.posts.push(newPost);
+    state.profilePage.newPostText = '';
+    rerenderEntireTree(state);
+}
+
+export let updateNewPostText = (newText:string) => {
+    state.profilePage.newPostText = newText;
     rerenderEntireTree(state);
 }
 
