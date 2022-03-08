@@ -89,6 +89,8 @@ export const subscribe = (observer:()=>void) => {
     rerenderEntireTree = observer
 }
 
+// store
+
 export default state
 
 
