@@ -5,13 +5,15 @@ import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfilePageType} from "../../redux/state";
 
 
-export const  Profile:React.FC<ProfilePageType> = (props) => {
+export const Profile: React.FC<ProfilePageType> = (props) => {
 
     return (
         <div className={s.background}>
             <ProfileInfo/>
-            <MyPosts posts={props.posts} addPost={props.addPost} updateNewPostText={props.updateNewPostText} newPostText={props.newPostText}/>
+            <MyPosts posts={props.posts} addPost={props.addPost} updateNewPostText={props.updateNewPostText}
+                     newPostText={props.newPostText}/>
         </div>
     );
 };
+
 

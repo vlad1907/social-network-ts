@@ -48,7 +48,7 @@ export let state:RootStateType = {
     profilePage: {
         posts: [
             {id: 1, message: "Hi dude", likesCount: 12},
-            {id: 2, message: "Fuck you", likesCount: 11}
+            {id: 2, message: "Yooo", likesCount: 11}
         ],
         newPostText: 'some text'
     },

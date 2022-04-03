@@ -7,9 +7,7 @@ import App from './App';
 import {BrowserRouter} from "react-router-dom";
 
 
-
-
- let rerenderEntireTree = (state:RootStateType) => {
+let rerenderEntireTree = (state: RootStateType) => {
     ReactDOM.render(
         <BrowserRouter>
             <App state={state} addPost={addPost} updateNewPostText={updateNewPostText}/>
@@ -19,7 +17,7 @@ import {BrowserRouter} from "react-router-dom";
 
 rerenderEntireTree(state);
 
- subscribe(rerenderEntireTree);
+subscribe(rerenderEntireTree);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
