@@ -6,24 +6,26 @@ import {PostType, ProfilePageType} from "../../../redux/state";
 type PropsType = {
     posts: Array<PostType>
     newPostText: string
-    updateNewPostText:(newText: string) => void
-    addPost:(postMessage: string) => void
+    // updateNewPostText:(newText: string) => void
+    // addPost:(postMessage: string) => void
+    dispatch: (action: any) => void
 }
 
-export const MyPosts:React.FC<PropsType> = (props) => {
+export const MyPosts: React.FC<PropsType> = (props) => {
 
-    let postsElements = props.posts.map( (p,index) =>  <Post id={p.id} message={p.message} likesCount={p.likesCount} key={index}/>)
+    let postsElements = props.posts.map((p, index) => <Post id={p.id} message={p.message} likesCount={p.likesCount}
+                                                            key={index}/>)
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
-    let addPost =() => {
+    let addPost = () => {
         let text = newPostElement.current!.value;   //TODO узнать на супорте про !
-        props.addPost(text);
+        props.dispatch({type: 'ADD-POST'});
     }
 
     let onPostChange = () => {
         let text = newPostElement.current!.value
-        props.updateNewPostText(text);
+        props.dispatch({type: 'UPDATE-NEW-POST-TEXT'});
     }
 
     return (

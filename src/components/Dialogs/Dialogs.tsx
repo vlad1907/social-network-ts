@@ -5,7 +5,7 @@ import {DialogItem} from "./DIalogItem/DialogItem";
 import {DialogPageType} from "../../redux/state";
 
 
-export const Dialogs:React.FC<DialogPageType> = (props) => {
+export const Dialogs: React.FC<DialogPageType> = (props) => {
 
     // let dialogs = [
     //     {id: 1, name: 'Vlad'},

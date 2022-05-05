@@ -4,7 +4,6 @@ import {NavLink} from "react-router-dom";
 import {DialogType} from "../../../redux/state";
 
 
-
 export const DialogItem: React.FC<DialogType> = (props) => {
     let path = "/dialogs/" + props.id;
     return <div className={`${s.dialog} ${s.active}`}>

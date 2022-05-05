@@ -1,7 +1,8 @@
 export type StateType = {
     state: RootStateType
-    addPost: (postMessage: string) => void
-    updateNewPostText: (newText: string) => void
+    // addPost: (postMessage: string) => void
+    // updateNewPostText: (newText: string) => void
+    dispatch: (action: any) => void
 }
 
 export type MessageType = {
@@ -47,7 +48,7 @@ export type StoreType = {
     _callSubscriber: (state:RootStateType) => void
     subscribe: (observer: (state:RootStateType) => void) => void
     getState: () => RootStateType
-    dispatch: () => void
+    dispatch: (action: any) => void
 }
 
 export const store: StoreType = {
@@ -113,8 +114,8 @@ export const store: StoreType = {
             this._state.profilePage.newPostText = '';
             this._callSubscriber(this._state);
         } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = newText;
-            this._callSubscriber();
+            this._state.profilePage.newPostText = action.newText;
+            this._callSubscriber(this._state);
         }
     }
 

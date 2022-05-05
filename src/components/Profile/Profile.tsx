@@ -7,8 +7,9 @@ import {PostType, ProfilePageType} from "../../redux/state";
 type PropsType = {
     posts: Array<PostType>
     newPostText: string
-    updateNewPostText:(newText: string) => void
-    addPost:(postMessage: string) => void
+    // updateNewPostText:(newText: string) => void
+    // addPost:(postMessage: string) => void
+    dispatch: (action: any) => void
 }
 
 export const Profile: React.FC<PropsType> = (props) => {
@@ -16,7 +17,7 @@ export const Profile: React.FC<PropsType> = (props) => {
     return (
         <div className={s.background}>
             <ProfileInfo/>
-            <MyPosts posts={props.posts} addPost={props.addPost} updateNewPostText={props.updateNewPostText}
+            <MyPosts posts={props.posts} dispatch={props.dispatch}
                      newPostText={props.newPostText}/>
         </div>
     );
