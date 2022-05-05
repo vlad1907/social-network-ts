@@ -41,14 +41,26 @@ export  type RootStateType = {
     sidebar: SidebarType
 }
 
+type AddPostActionType = {
+    type: 'ADD-POST'
+    newPostText: string
+}
+
+type UpdateNewTextActionType = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    newText: string
+}
+
+export type ActionsTypes = AddPostActionType | UpdateNewTextActionType
+
 export type StoreType = {
     _state: RootStateType
     // updateNewPostText: (newText: string) => void
     // addPost: (postMessage: string) => void
-    _callSubscriber: (state:RootStateType) => void
-    subscribe: (observer: (state:RootStateType) => void) => void
+    _callSubscriber: (state: RootStateType) => void
+    subscribe: (observer: (state: RootStateType) => void) => void
     getState: () => RootStateType
-    dispatch: (action: any) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
 export const store: StoreType = {
@@ -100,7 +112,7 @@ export const store: StoreType = {
         this._callSubscriber(this._state);
     },*/
 
-    subscribe(observer: (state:RootStateType) => void) {
+    subscribe(observer: (state: RootStateType) => void) {
         this._callSubscriber = observer
     },
     dispatch(action) {

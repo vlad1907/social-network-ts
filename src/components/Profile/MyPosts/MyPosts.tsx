@@ -1,14 +1,14 @@
 import React from 'react';
 import s from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {PostType, ProfilePageType} from "../../../redux/state";
+import {ActionsTypes, PostType} from "../../../redux/state";
 
 type PropsType = {
     posts: Array<PostType>
     newPostText: string
     // updateNewPostText:(newText: string) => void
     // addPost:(postMessage: string) => void
-    dispatch: (action: any) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
 export const MyPosts: React.FC<PropsType> = (props) => {
@@ -20,13 +20,12 @@ export const MyPosts: React.FC<PropsType> = (props) => {
 
     let addPost = () => {
         let text = newPostElement.current!.value;   //TODO узнать на супорте про !
-        props.dispatch({type: 'ADD-POST'});
+        props.dispatch({type: 'ADD-POST', newPostText:text});
     }
 
     let onPostChange = () => {
         let text = newPostElement.current!.value
-        let action = {type: 'UPDATE-NEW-POST-TEXT', newText: text};
-        props.dispatch(action);
+        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: text});
     }
 
     return (
