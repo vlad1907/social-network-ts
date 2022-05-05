@@ -83,7 +83,7 @@ export const store: StoreType = {
         return this._state;
     },
 
-    addPost(postMessage: string) {
+    /*addPost(postMessage: string) {
 
         const newPost: PostType = {
             id: 5,
@@ -93,12 +93,12 @@ export const store: StoreType = {
         this._state.profilePage.posts.push(newPost);
         this._state.profilePage.newPostText = '';
         this._callSubscriber(this._state);
-    },
+    },*/
 
-    updateNewPostText(newText: string) {
+    /*updateNewPostText(newText: string) {
         this._state.profilePage.newPostText = newText;
         this._callSubscriber(this._state);
-    },
+    },*/
 
     subscribe(observer: (state:RootStateType) => void) {
         this._callSubscriber = observer
@@ -117,6 +117,7 @@ export const store: StoreType = {
             this._state.profilePage.newPostText = action.newText;
             this._callSubscriber(this._state);
         }
+
     }
 
 }
