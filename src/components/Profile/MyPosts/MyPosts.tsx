@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {ActionsTypes, PostType} from "../../../redux/state";
+import {ActionsTypes, addPostAC, onPostChangeAC, PostType} from "../../../redux/state";
 
 type PropsType = {
     posts: Array<PostType>
@@ -11,6 +11,7 @@ type PropsType = {
     dispatch: (action: ActionsTypes) => void
 }
 
+
 export const MyPosts: React.FC<PropsType> = (props) => {
 
     let postsElements = props.posts.map((p, index) => <Post id={p.id} message={p.message} likesCount={p.likesCount}
@@ -19,13 +20,15 @@ export const MyPosts: React.FC<PropsType> = (props) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
     let addPost = () => {
-        let text = newPostElement.current!.value;   //TODO узнать на супорте про !
-        props.dispatch({type: 'ADD-POST', newPostText:text});
+        // let text = newPostElement.current!.value;   //TODO узнать на супорте про !
+        // props.dispatch({type: 'ADD-POST'});
+        props.dispatch(addPostAC());
     }
 
     let onPostChange = () => {
         let text = newPostElement.current!.value
-        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: text});
+        // props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: text});
+        props.dispatch(onPostChangeAC(text));
     }
 
     return (
