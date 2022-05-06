@@ -9,6 +9,7 @@ type DialogsType = {
     dialogs: Array<DialogType>
     newMessageBody: string
     dispatch: (action: any) => void
+
 }
 
 export const Dialogs: React.FC<DialogsType> = (props) => {
