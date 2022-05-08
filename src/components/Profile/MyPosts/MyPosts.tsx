@@ -6,8 +6,6 @@ import {ActionsTypes, addPostAC, onPostChangeAC, PostType} from "../../../redux/
 type PropsType = {
     posts: Array<PostType>
     newPostText: string
-    // updateNewPostText:(newText: string) => void
-    // addPost:(postMessage: string) => void
     dispatch: (action: ActionsTypes) => void
 }
 
@@ -20,14 +18,11 @@ export const MyPosts: React.FC<PropsType> = (props) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
     let addPost = () => {
-        // let text = newPostElement.current!.value;   //TODO узнать на супорте про !
-        // props.dispatch({type: 'ADD-POST'});
         props.dispatch(addPostAC());
     }
 
     let onPostChange = () => {
         let text = newPostElement.current!.value
-        // props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: text});
         props.dispatch(onPostChangeAC(text));
     }
 
