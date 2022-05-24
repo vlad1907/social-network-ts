@@ -4,19 +4,18 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ActionsTypes, PostType} from "../../redux/store";
 
-type PropsType = {
-    posts: Array<PostType>
-    newPostText: string
-    dispatch: (action: ActionsTypes) => void
-}
+// type PropsType = {
+//     posts: Array<PostType>
+//     newPostText: string
+//     dispatch: (action: ActionsTypes) => void
+// }
 
-export const Profile: React.FC<PropsType> = (props) => {
+export const Profile = () => {
 
     return (
         <div className={s.background}>
             <ProfileInfo/>
-            <MyPosts posts={props.posts} dispatch={props.dispatch}
-                     newPostText={props.newPostText}/>
+            <MyPosts/>
         </div>
     );
 };
