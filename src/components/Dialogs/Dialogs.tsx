@@ -2,57 +2,33 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DIalogItem/DialogItem";
-import {DialogType, MessageType, newMessageAC, sendMessageAC} from "../../redux/store";
-import {StoreContext} from '../../StoreContext';
+import {DialogPageType, newMessageAC, sendMessageAC} from "../../redux/store";
 
-// type DialogsType = {
-//     messages: Array<MessageType>
-//     dialogs: Array<DialogType>
-//     newMessageBody: string
-//     dispatch: (action: any) => void
-//
-// }
+type DialogPagePropsType = {
+    dialogsPage: DialogPageType
+    newMessage: string
+    sendMessage: () => void
+    updateDialogsText: (value: string) => void
+}
 
-export const Dialogs = () => {
+export const Dialogs = (props:DialogPagePropsType) => {
 
-    /* let dialogElements = props.dialogs.map((d, index) => <DialogItem id={d.id} name={d.name} key={index}/>
+     let dialogElements = props.dialogsPage.dialogs.map((d, index) => <DialogItem id={d.id} name={d.name} key={index}/>
      );
-
-     let messagesElements = props.messages.map((message, index) => <Message message={message.message} key={index}/>);
-     let newMessageBody = props.newMessageBody;
+     let messagesElements = props.dialogsPage.messages.map((message, index) => <Message message={message.message} key={index}/>);
+     let newMessageBody = props.newMessage;
 
      let onSendMessageClick = () => {
-         props.dispatch(sendMessageAC());
+         props.sendMessage()
      }
 
      let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
          let body = e.currentTarget.value;
-         props.dispatch(newMessageAC(body));
-     }*/
+         props.updateDialogsText(body)
+     }
 
     return (
-        <StoreContext.Consumer>
-            {
-                (store) => {
-                    let state = store.getState().dialogsPage
-                    let dialogElements = state.dialogs.map((d, index) => <DialogItem id={d.id} name={d.name}
-                                                                                     key={index}/>
-                    );
-
-                    let messagesElements = state.messages.map((message, index) => <Message message={message.message}
-                                                                                           key={index}/>);
-                    let newMessageBody = state.newMessageBody;
-
-                    let onSendMessageClick = () => {
-                        store.dispatch(sendMessageAC());
-                    }
-
-                    let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-                        let body = e.currentTarget.value;
-                        store.dispatch(newMessageAC(body));
-                    }
-
-                    return <div className={s.dialogs}>
+         <div className={s.dialogs}>
                         <div className={s.dialogsItem}>
                             {dialogElements}
                         </div>
@@ -67,7 +43,6 @@ export const Dialogs = () => {
                             </div>
                         </div>
                     </div>
-                }}
-        </StoreContext.Consumer>
+
     );
 };
