@@ -13,6 +13,7 @@ type MapDispatchToPropsType = {
 }
 
 let mapStateToProps = (state: RootStateType):MapStateToPropsType => {
+    debugger
     return {
         dialogsPage: state.dialogsPage,
         newMessage: state.dialogsPage.newMessageBody
@@ -29,4 +30,6 @@ let mapDispatchToProps = (dispatch: Dispatch):MapDispatchToPropsType => {
     }
 }
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+
+export default DialogsContainer;

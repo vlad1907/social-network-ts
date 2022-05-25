@@ -12,9 +12,7 @@ type DialogPagePropsType = {
 }
 
 export const Dialogs = (props:DialogPagePropsType) => {
-
-     let dialogElements = props.dialogsPage.dialogs.map((d, index) => <DialogItem id={d.id} name={d.name} key={index}/>
-     );
+     let dialogElements = props.dialogsPage.dialogs.map((d, index) => <DialogItem id={d.id} name={d.name} key={index}/>);
      let messagesElements = props.dialogsPage.messages.map((message, index) => <Message message={message.message} key={index}/>);
      let newMessageBody = props.newMessage;
 

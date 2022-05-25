@@ -3,8 +3,8 @@ import './App.css';
 import {Route, Routes} from "react-router-dom";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Header} from "./components/Header/Header";
-import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 import {Profile} from './components/Profile/Profile';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 
 function App() {
