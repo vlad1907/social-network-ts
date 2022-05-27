@@ -13,7 +13,6 @@ type MapDispatchToPropsType = {
 }
 
 let mapStateToProps = (state: RootStateType):MapStateToPropsType => {
-    debugger
     return {
         dialogsPage: state.dialogsPage,
         newMessage: state.dialogsPage.newMessageBody
