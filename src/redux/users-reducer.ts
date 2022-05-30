@@ -1,49 +1,36 @@
 export type UsersStateType = {
     users: UserType[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    isFetching: boolean
 }
 
 export type UserType = {
     id: number
-    photoUrl: string
+    photos: {
+        small: string | null
+        large: string | null
+    }
     followed: boolean
-    fullName: string
-    status: string
-    location: LocationType
+    name: string
+    uniqueUrlName: string | null
+    status: string | null
+    // location: LocationType
 }
 
-type LocationType = {
+/*type LocationType = {
     city: string
     country: string
-}
+}*/
 
 
 let initialState: UsersStateType = {
-    users: [
-        {
-            id: 1,
-            photoUrl: 'https://avatars.mds.yandex.net/get-kinopoisk-image/1599028/4120d16f-9a21-4972-8d35-a1564b9a9911/220x330',
-            followed: true,
-            fullName: 'Dmitry',
-            status: 'boss',
-            location: {city: 'Minsk', country: 'Belarus'}
-        },
-        {
-            id: 2,
-            photoUrl: 'https://avatars.mds.yandex.net/get-kinopoisk-image/1599028/4120d16f-9a21-4972-8d35-a1564b9a9911/220x330',
-            followed: true,
-            fullName: 'Sasha',
-            status: 'boss',
-            location: {city: 'Moscow', country: 'Russia'}
-        },
-        {
-            id: 3,
-            photoUrl: 'https://avatars.mds.yandex.net/get-kinopoisk-image/1599028/4120d16f-9a21-4972-8d35-a1564b9a9911/220x330',
-            followed: false,
-            fullName: 'Lena',
-            status: 'boss',
-            location: {city: 'Kiev', country: 'Ukraine'}
-        }
-    ]
+    users: [],
+    pageSize: 10,
+    totalUsersCount: 0,
+    currentPage: 1,
+    isFetching: false
 }
 
 export type UserReducerActionType =
