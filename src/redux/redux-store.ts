@@ -7,8 +7,8 @@ import {usersReducer} from './users-reducer';
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
-    dialogsPage:dialogsReducer,
-    sidebar:sidebarReducer,
+    dialogsPage: dialogsReducer,
+    sidebar: sidebarReducer,
     usersPage: usersReducer
 });
 
