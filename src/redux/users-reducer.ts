@@ -1,21 +1,21 @@
 export type UsersStateType = {
     users: UserType[]
-    pageSize: number
+ /*   pageSize: number
     totalUsersCount: number
     currentPage: number
-    isFetching: boolean
+    isFetching: boolean*/
 }
 
 export type UserType = {
     id: number
+    name: string
+    uniqueUrlName: string | null
     photos: {
         small: string | null
         large: string | null
     }
-    followed: boolean
-    name: string
-    uniqueUrlName: string | null
     status: string | null
+    followed: boolean
     // location: LocationType
 }
 
@@ -27,10 +27,10 @@ export type UserType = {
 
 let initialState: UsersStateType = {
     users: [],
-    pageSize: 10,
+   /* pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false*/
 }
 
 export type UserReducerActionType =
@@ -64,7 +64,7 @@ export const usersReducer = (state = initialState, action: UserReducerActionType
         case 'SET-USERS':
             return {
                 ...state,
-                users: {...state.users, ...action.newUser}
+                users: action.users
             }
         default :
             return state;
@@ -77,6 +77,6 @@ export const followAC = (id: number) => {
 export const unfollowAC = (id: number) => {
     return {type: 'UNFOLLOW', userId: id} as const
 }
-export const setUsersAC = (users: UsersStateType) => {
-    return {type: 'SET-USERS', newUser: users} as const
+export const setUsersAC = (users:  UserType[]) => {
+    return {type: 'SET-USERS',  users} as const
 }
