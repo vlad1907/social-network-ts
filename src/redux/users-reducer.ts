@@ -1,9 +1,9 @@
 export type UsersStateType = {
     users: UserType[]
-    /*   pageSize: number
-       totalUsersCount: number
-       currentPage: number
-       isFetching: boolean*/
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    // isFetching: boolean
 }
 
 export type UserType = {
@@ -27,16 +27,18 @@ export type UserType = {
 
 let initialState: UsersStateType = {
     users: [],
-    /* pageSize: 10,
-     totalUsersCount: 0,
-     currentPage: 1,
-     isFetching: false*/
+    pageSize: 4,
+    totalUsersCount: 0,
+    currentPage: 1
+    // isFetching: false
 }
 
 export type UserReducerActionType =
     ReturnType<typeof followAC>
     | ReturnType<typeof unfollowAC>
     | ReturnType<typeof setUsersAC>
+    | ReturnType<typeof setCurrentPageAC>
+    | ReturnType<typeof setUsersTotalCountAC>
 
 export const usersReducer = (state = initialState, action: UserReducerActionType): UsersStateType => {
 
@@ -66,6 +68,16 @@ export const usersReducer = (state = initialState, action: UserReducerActionType
                 ...state,
                 users: action.users
             }
+        case 'SET-CURRENT-PAGE':
+            return {
+                ...state,
+                currentPage: action.currentPage
+            }
+        case 'SET-TOTAL-USERS-COUNT':
+            return {
+                ...state,
+                totalUsersCount: action.count
+            }
         default :
             return state;
     }
@@ -79,4 +91,10 @@ export const unfollowAC = (id: number) => {
 }
 export const setUsersAC = (users: UserType[]) => {
     return {type: 'SET-USERS', users} as const
+}
+export const setCurrentPageAC = (currentPage: number) => {
+    return {type: 'SET-CURRENT-PAGE', currentPage} as const
+}
+export const setUsersTotalCountAC = (totalUsersCount: number) => {
+    return {type: 'SET-TOTAL-USERS-COUNT', count: totalUsersCount} as const
 }
