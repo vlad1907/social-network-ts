@@ -10,10 +10,10 @@ type UsersPropsType = {
     totalUsersCount: number
     pageSize: number
     currentPage: number
-    onPageChanged:(pageNumber: number) => void
+    onPageChanged: (pageNumber: number) => void
 }
 
-export const Users = (props:UsersPropsType) => {
+export const Users = (props: UsersPropsType) => {
 
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
