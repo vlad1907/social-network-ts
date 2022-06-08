@@ -1,5 +1,14 @@
-import {ActionsTypes, DialogPageType} from './store';
+import {MessageType} from '../components/Dialogs/Message/Message';
+import {DialogType} from '../components/Dialogs/Dialogs';
 
+type DialogPageType = {
+    messages: Array<MessageType>
+    dialogs: Array<DialogType>
+    newMessageBody: string
+}
+
+type DialogPageActionsTypes = ReturnType<typeof newMessageAC>
+    | ReturnType<typeof sendMessageAC>
 
 let initialState = {
     dialogs: [
@@ -15,7 +24,7 @@ let initialState = {
     newMessageBody: ""
 }
 
-export const dialogsReducer = (state: DialogPageType = initialState, action: ActionsTypes): DialogPageType => {
+export const dialogsReducer = (state: DialogPageType = initialState, action: DialogPageActionsTypes): DialogPageType => {
 
 
     switch (action.type) {
@@ -35,4 +44,16 @@ export const dialogsReducer = (state: DialogPageType = initialState, action: Act
         default:
             return state;
     }
+}
+
+export const newMessageAC = (text: string) => {
+    return {
+        type: 'UPDATE-NEW-MESSAGE-BODY',
+        body: text
+    } as const
+}
+export const sendMessageAC = () => {
+    return {
+        type: 'SEND-MESSAGE'
+    } as const
 }
