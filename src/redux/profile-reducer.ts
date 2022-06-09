@@ -8,6 +8,28 @@ export type PostType = {
 export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
+    profile: ProfileResponseType | null
+}
+
+export type ProfileResponseType = {
+    aboutMe: string
+    contacts: ContactsType
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    userId: number
+    photos: {small: string, large: string}
+}
+
+type ContactsType = {
+    facebook: string
+    website: string
+    vk: string
+    twitter: string
+    instagram: string
+    youtube: string
+    github: string
+    mainLink: string
 }
 
 
@@ -62,7 +84,7 @@ export const addPostAC = () => {
     } as const
 }
 
-export const setUserProfile = (profile) => {
+export const setUserProfile = (profile: ProfileResponseType) => {
     return {
         type: 'SET-USER-PROFILE', profile
     } as const
