@@ -4,6 +4,7 @@ import {dialogsReducer} from './dialogs-reducer';
 import {sidebarReducer, SidebarType} from './sidebar-reducer';
 import {usersReducer} from './users-reducer';
 import {DialogPageType} from '../components/Dialogs/Dialogs';
+import {authReducer} from './auth-reducer';
 
 export type RootStateType = {
     profilePage: ProfilePageType
@@ -16,7 +17,8 @@ let rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+    auth: authReducer
 });
 
 export type AppStateType = ReturnType<typeof rootReducer>
