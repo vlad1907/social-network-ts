@@ -9,10 +9,10 @@ let initialState: AuthStateType = {
     userId: 0,
     email: "",
     login: "",
-    isFetching: false
+    isAuth: false
 }
 
-export type AuthReducerActionType = ReturnType<typeof setUserData>
+export type AuthReducerActionType = ReturnType<typeof setAuthUserData>
 
 export const authReducer = (state = initialState, action: AuthReducerActionType): AuthStateType => {
 
@@ -20,7 +20,8 @@ export const authReducer = (state = initialState, action: AuthReducerActionType)
         case 'SET-USER-DATA':
             return {
                 ...state,
-                ...action.data
+                ...action.data,
+                isAuth: true
             }
 
         default :
@@ -28,6 +29,6 @@ export const authReducer = (state = initialState, action: AuthReducerActionType)
     }
 }
 
-export const setUserData = (userId, email, login) => {
+export const setAuthUserData = (userId, email, login) => {
     return {type: 'SET-USER-DATA', data: {userId, email, login}} as const
 }
