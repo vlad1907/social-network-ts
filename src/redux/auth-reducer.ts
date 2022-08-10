@@ -1,23 +1,35 @@
-export type AuthStateType = {
-    userId: number
-    email: string
-    login: string
-    isFetching: boolean
+export const SET_USER_DATA = 'SET-USER-DATA';
+
+export type AuthDataType = {
+    id: number | null
+    email: string | null
+    login: string | null
+    isAuth: boolean
 }
 
-let initialState: AuthStateType = {
-    userId: 0,
-    email: "",
-    login: "",
+export type AuthResponseType = {
+    resultCode: number
+    messages: Array<string>
+    data: {
+        id: number
+        email: string
+        login: string
+    }
+}
+
+const initialUsers: AuthDataType = {
+    id: null,
+    email: null,
+    login: null,
     isAuth: false
 }
 
-export type AuthReducerActionType = ReturnType<typeof setAuthUserData>
+export type AuthReducerActionType = ReturnType<typeof setUserDataAC>
 
-export const authReducer = (state = initialState, action: AuthReducerActionType): AuthStateType => {
+export const authReducer = (state = initialUsers, action: AuthReducerActionType): AuthDataType => {
 
     switch (action.type) {
-        case 'SET-USER-DATA':
+        case SET_USER_DATA:
             return {
                 ...state,
                 ...action.data,
@@ -29,6 +41,7 @@ export const authReducer = (state = initialState, action: AuthReducerActionType)
     }
 }
 
-export const setAuthUserData = (userId, email, login) => {
-    return {type: 'SET-USER-DATA', data: {userId, email, login}} as const
-}
+export const setUserDataAC = (id: number, email: string, login: string) => ({
+    type: SET_USER_DATA,
+    data: {id, email, login}
+} as const);
