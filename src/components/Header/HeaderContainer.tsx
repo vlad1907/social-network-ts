@@ -3,7 +3,7 @@ import {Header} from './Header';
 import axios, {AxiosResponse} from 'axios';
 import {connect} from 'react-redux';
 import {AuthResponseType, setUserDataAC} from '../../redux/auth-reducer';
-import {AppStateType, RootStateType} from "../../redux/redux-store";
+import {AppStateType} from "../../redux/redux-store";
 
 type MapStateToPropsType = {
     isAuth: boolean
