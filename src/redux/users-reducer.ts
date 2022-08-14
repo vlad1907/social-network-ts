@@ -23,7 +23,17 @@ export type UserType = {
     city: string
     country: string
 }*/
+export type UsersResponseType = {
+    items: UserType[]
+    totalCount: number
+    error: null | string
+}
 
+export type UsersFollowResponseType = {
+    resultCode: number
+    messages: string
+    data: {}
+}
 
 let initialState: UsersStateType = {
     users: [],
