@@ -29,7 +29,7 @@ export const usersAPI = {
             return response.data;
         });
     },
-    followUser(id: number) {
+    followUsers(id: number) {
         return instance.post(`follow/${id}`)
             .then((response: AxiosResponse<UsersFollowResponseType>) => {
                 return response.data;
