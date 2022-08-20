@@ -12,7 +12,7 @@ export const Header = (props: HeaderType) => {
         <header className={s.header}>
             <img src="https://www.logo.wine/a/logo/Babylon.js/Babylon.js-Logo.wine.svg" alt={"logo"}/>
             <div className={s.loginBlock}>
-                {props.isAuth ? props.login : <NavLink to={'/login'}>Login</NavLink>}
+                {props.isAuth ? props.login : <NavLink to={'/Login'}>Login</NavLink>}
             </div>
         </header>
     );

@@ -2,22 +2,24 @@ import {connect} from 'react-redux';
 import {DialogPageType, Dialogs} from './Dialogs';
 import {Dispatch} from 'redux';
 import {newMessageAC, sendMessageAC} from '../../redux/dialogs-reducer';
-import {RootStateType} from '../../redux/redux-store';
+import {AppStateType} from '../../redux/redux-store';
 
 
 type MapStateToPropsType = {
     newMessage: string
     dialogsPage: DialogPageType
+    isAuth: boolean
 }
 type MapDispatchToPropsType = {
     updateDialogsText: (value: string) => void
     sendMessage: () => void
 }
 
-let mapStateToProps = (state: RootStateType):MapStateToPropsType => {
+let mapStateToProps = (state: AppStateType):MapStateToPropsType => {
     return {
         dialogsPage: state.dialogsPage,
-        newMessage: state.dialogsPage.newMessageBody
+        newMessage: state.dialogsPage.newMessageBody,
+        isAuth: state.auth.isAuth
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch):MapDispatchToPropsType => {
