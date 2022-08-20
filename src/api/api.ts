@@ -12,11 +12,7 @@ const instance = axios.create({
 })
 
 export const usersAPI = {
-    authMe() {
-        return instance.get(`auth/me`).then((response: AxiosResponse<AuthResponseType>) => {
-            return response.data
-        })
-    },
+
     getUsers(currentPage: number, pageSize: number) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`, {
             withCredentials: true
@@ -41,5 +37,12 @@ export const usersAPI = {
                 return response.data;
             })
     }
+}
 
+export const authAPI = {
+    me() {
+        return instance.get(`auth/me`).then((response: AxiosResponse<AuthResponseType>) => {
+            return response.data
+        })
+    }
 }

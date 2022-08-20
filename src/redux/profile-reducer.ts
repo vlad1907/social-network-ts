@@ -1,3 +1,5 @@
+import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 export type PostType = {
     id: number
@@ -88,6 +90,13 @@ export const setUserProfile = (profile: ProfileResponseType) => {
     return {
         type: 'SET-USER-PROFILE', profile
     } as const
+}
+export const getUserProfile = (userId: number) =>  {
+    return (dispatch: Dispatch) => {
+        usersAPI.showProfile(userId).then((data) => {
+            dispatch(setUserProfile(data));
+        });
+    }
 }
 
 export const onPostChangeAC = (text: string) => {
