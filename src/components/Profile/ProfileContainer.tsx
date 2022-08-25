@@ -3,7 +3,8 @@ import {Profile} from './Profile';
 import {connect} from 'react-redux';
 import {getUserProfile, ProfilePageType, ProfileResponseType} from '../../redux/profile-reducer';
 import {AppStateType} from '../../redux/redux-store';
-import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
 // type PropsType = {
 //     posts: Array<PostType>
@@ -20,7 +21,7 @@ type MapStateToPropsType = {
     isAuth: boolean
 }
 
-type MapDispatchToPropsType = {
+export type MapDispatchToPropsType = {
     getUserProfile: (userId: number) => void
 }
 
@@ -34,23 +35,23 @@ class ProfileContainer extends React.Component<ProfileContainerType, ProfilePage
         if (!userId) {
             userId = 2
         }
-      this.props.getUserProfile(userId)
+        this.props.getUserProfile(userId)
     }
 
     render() {
-        if (!this.props.isAuth) return <Redirect to={'/login'}/>;
         return (
             <Profile {...this.props} profile={this.props.profile}/>
         );
     }
 }
 
-let mapStateToProps = (state: AppStateType) => ({
+// let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
+
+let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
     isAuth: state.auth.isAuth
 })
 
 let withUrlDataContainerComponent = withRouter(ProfileContainer);
 
-export default connect(mapStateToProps, {getUserProfile})(withUrlDataContainerComponent)
-
+export default withAuthRedirect(connect(mapStateToProps, {getUserProfile})(withUrlDataContainerComponent))
