@@ -1,11 +1,13 @@
-import {useState} from 'react';
+import {ChangeEvent, useState} from 'react';
 
 type ProfileStatusType = {
     status: string
+    updateUserStatus: (status: string) => void
 }
 
 export const ProfileStatus = (props: ProfileStatusType) => {
     const [editMode, setEditMode] = useState<boolean>(false);
+    const [status, setStatus] = useState<string>(props.status);
 
     const activateEditMode = () => {
         setEditMode(true)
@@ -13,6 +15,11 @@ export const ProfileStatus = (props: ProfileStatusType) => {
 
     const deactivateEditMode = () => {
         setEditMode(false)
+        props.updateUserStatus(status)
+    }
+
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setStatus(e.currentTarget.value)
     }
 
     return (
@@ -24,7 +31,8 @@ export const ProfileStatus = (props: ProfileStatusType) => {
             </div>
             <div>
                 {
-                    editMode && <input autoFocus value={props.status} onBlur={deactivateEditMode}/>
+                    editMode &&
+                    <input autoFocus onChange={onChangeHandler} value={props.status} onBlur={deactivateEditMode}/>
                 }
             </div>
         </>

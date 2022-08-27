@@ -21,9 +21,8 @@ export const usersAPI = {
         })
     },
     showProfile(userId: number) {
-        return instance.get(`profile/` + userId).then((response: AxiosResponse<ProfileResponseType>) => {
-            return response.data;
-        });
+        console.warn('Obsolete method. Please use profileAPI object')
+        return profileAPI.showProfile(userId)
     },
     followUsers(id: number) {
         return instance.post(`follow/${id}`)
@@ -44,5 +43,19 @@ export const authAPI = {
         return instance.get(`auth/me`).then((response: AxiosResponse<AuthResponseType>) => {
             return response.data
         })
+    }
+}
+
+export const profileAPI = {
+    showProfile(userId: number) {
+        return instance.get(`profile/${userId}`).then((response: AxiosResponse<ProfileResponseType>) => {
+            return response.data;
+        });
+    },
+    getStatus (userId: number) {
+        return instance.get(`profile/status/${userId}`)
+    },
+    updateStatus (status: string) {
+        return instance.put(`profile/status`, {status})
     }
 }
