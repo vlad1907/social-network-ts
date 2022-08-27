@@ -1,4 +1,4 @@
-import {profileAPI, usersAPI} from "../api/api";
+import {profileAPI} from "../api/api";
 import {Dispatch} from "redux";
 
 export type PostType = {
@@ -107,7 +107,7 @@ export const setStatus = (status: string) => ({type: 'SET-STATUS', status} as co
 
 export const getUserProfile = (userId: number) => {
     return (dispatch: Dispatch) => {
-        usersAPI.showProfile(userId).then((data) => {
+        profileAPI.showProfile(userId).then((data) => {
             dispatch(setUserProfile(data));
         });
     }
