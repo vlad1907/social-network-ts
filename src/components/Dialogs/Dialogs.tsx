@@ -1,13 +1,13 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import s from './Dialogs.module.css'
 import {Message, MessageType} from "./Message/Message";
 import {DialogItem} from "./DIalogItem/DialogItem";
 import {Redirect} from "react-router-dom";
+import {AddMessageForm} from './Message/AddMessageForm';
 
 export type DialogPageType = {
     messages: Array<MessageType>
     dialogs: Array<DialogType>
-    newMessageBody: string
 }
 export type DialogType = {
     id: number
@@ -17,7 +17,7 @@ export type DialogType = {
 type DialogPagePropsType = {
     dialogsPage: DialogPageType
     newMessage: string
-    sendMessage: () => void
+    sendMessage: (newMessage: string) => void
     updateDialogsText: (value: string) => void
     isAuth: boolean
 }
@@ -26,16 +26,11 @@ export const Dialogs = (props: DialogPagePropsType) => {
     let dialogElements = props.dialogsPage.dialogs.map((d, index) => <DialogItem id={d.id} name={d.name} key={index}/>);
     let messagesElements = props.dialogsPage.messages.map((message, index) => <Message message={message.message}
                                                                                        key={index} id={message.id}/>);
-    let newMessageBody = props.newMessage;
 
-    let onSendMessageClick = () => {
-        props.sendMessage()
+    let addNewMessage  = (newMessage: string) => {
+        props.sendMessage(newMessage)
     }
 
-    let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let body = e.currentTarget.value;
-        props.updateDialogsText(body)
-    }
 
     if (!props.isAuth) return <Redirect to={'/login'}/>;
     return (
@@ -45,13 +40,7 @@ export const Dialogs = (props: DialogPagePropsType) => {
             </div>
             <div className={s.messages}>
                 <div>{messagesElements}</div>
-                <div>
-                    <div><textarea value={newMessageBody} onChange={onNewMessageChange}
-                                   placeholder={'Enter your message'}></textarea></div>
-                    <div>
-                        <button onClick={onSendMessageClick}>Send</button>
-                    </div>
-                </div>
+              <AddMessageForm sendMessage={addNewMessage}/>
             </div>
         </div>
 
