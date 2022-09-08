@@ -1,7 +1,8 @@
 import React from 'react';
-import {Field, Form, Formik} from "formik";
-import a from './../../common/FormControl/Textarea/Textarea.module.css'
+import {Form, Formik} from "formik";
 import s from '../../common/Button/Button.module.css'
+import {FormControl} from '../../common/FormControl/FormControl';
+import * as Yup from "yup";
 
 type AddMessageFormType = {
     sendMessage: (values: string) => void
@@ -14,24 +15,22 @@ export const AddMessageForm = (props: AddMessageFormType) => {
         newMessage: ''
     }
     let addNewMessage = (values: InitialValuesType) => {
-        props.sendMessage( values.newMessage );
+        props.sendMessage(values.newMessage);
     }
+    const validationSchema = Yup.object({
+        newMessage: Yup.string().required('Required').max(30, `Maximum 30 symbols`)
+    })
 
     return (
         <Formik
-            initialValues = {initialValues}
+            initialValues={initialValues}
+            validationSchema={validationSchema}
             onSubmit={(values, {resetForm}) => {
                 addNewMessage(values);
                 resetForm({values: {newMessage: ''}})
             }}>
             <Form>
-                <Field
-                    className={a.textarea}
-                    name={'newMessage'}
-                    id={'newMessage'}
-                    as={'textarea'}
-                    placeholder={'enter text'}
-                />
+                <FormControl control={'textarea'} name={'newMessage'} placeholder={"add a message ..."}/>
                 <div>
                     <button className={s.button} type={'submit'}>Send</button>
                 </div>

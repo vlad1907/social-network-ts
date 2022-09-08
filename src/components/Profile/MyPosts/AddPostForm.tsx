@@ -1,36 +1,38 @@
 import React from 'react';
-import {Field, Form, Formik} from "formik";
-import a from "../../common/FormControl/Textarea/Textarea.module.css";
+import {Form, Formik} from "formik";
 import s from "../../common/Button/Button.module.css";
+import * as Yup from "yup";
+import {FormControl} from '../../common/FormControl/FormControl';
 
 type AddPostFormType = {
     addPost: (values: string) => void
 }
 type InitialValuesType = {
-    newMessage: string
+    newPost: string
 }
 export const AddPostForm = (props: AddPostFormType) => {
     const initialValues: InitialValuesType = {
-        newMessage: ''
+        newPost: ''
     }
     let addNewMessage = (values: InitialValuesType) => {
-        props.addPost( values.newMessage );
+        props.addPost(values.newPost);
     }
+    const validationSchema = Yup.object({
+        newPost: Yup.string().required('Required').max(200, `Maximum 200 symbols`)
+    })
 
     return (
         <Formik
-            initialValues = {initialValues}
+            initialValues={initialValues}
+            validationSchema={validationSchema}
             onSubmit={(values, {resetForm}) => {
                 addNewMessage(values);
-                resetForm({values: {newMessage: ''}})
+                resetForm({values: {newPost: ''}})
             }}>
             <Form>
-                <Field
-                    className={a.textarea}
-                    name={'newMessage'}
-                    id={'newMessage'}
-                    as={'textarea'}
-                    placeholder={"what's going on ..."}
+                <FormControl control={'textarea'}
+                             name={'newPost'}
+                             placeholder={"add a post here"}
                 />
                 <div>
                     <button className={s.button} type={'submit'}>Post</button>

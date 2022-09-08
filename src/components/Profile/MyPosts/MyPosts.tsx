@@ -18,7 +18,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
 
     let addPost = (newPost: string) => {
         props.onAddPost(newPost)
-    }
+    } 
 
     return (<div className={s.postsBlock}>
             <h3>My posts</h3>
