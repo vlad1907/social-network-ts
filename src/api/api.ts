@@ -1,6 +1,5 @@
 import axios, {AxiosResponse} from "axios";
 import {UsersFollowResponseType, UsersResponseType} from "../redux/users-reducer";
-import {AuthResponseType} from "../redux/auth-reducer";
 import {ProfileResponseType} from "../redux/profile-reducer";
 
 const instance = axios.create({
@@ -40,9 +39,13 @@ export const usersAPI = {
 
 export const authAPI = {
     me() {
-        return instance.get(`auth/me`).then((response: AxiosResponse<AuthResponseType>) => {
-            return response.data
-        })
+        return instance.get(`auth/me`)
+    },
+    login(email: string, password: string, rememberMe: boolean) {
+        return instance.post('/auth/login', {email, password, rememberMe:false})
+    },
+    logout() {
+        return instance.delete(' /auth/login')
     }
 }
 
@@ -52,10 +55,10 @@ export const profileAPI = {
             return response.data;
         });
     },
-    getStatus (userId: number) {
+    getStatus(userId: number) {
         return instance.get(`profile/status/${userId}`)
     },
-    updateStatus (status: string) {
+    updateStatus(status: string) {
         return instance.put(`profile/status`, {status})
     }
 }

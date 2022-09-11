@@ -1,52 +1,83 @@
 import React from 'react';
-import {Formik, Form, Field, ErrorMessage} from 'formik';
+import {Field, Form, Formik, FormikHelpers, FormikProps, FormikValues} from 'formik';
 import * as Yup from 'yup';
+import {Redirect} from 'react-router-dom';
+import s from './Login.module.css'
+import a from '../common/Button/Button.module.css'
+import {FormControl} from '../common/FormControl/FormControl';
+import {connect} from 'react-redux';
+import {login} from '../../redux/auth-reducer';
+import {AppRootStateType} from '../../redux/store';
 
 type InitialValuesType = {
-    login: string
+    email: string
     password: string
     rememberMe: boolean
 }
+type LoginType = {
+    login: (email: string, password: string, rememberMe: boolean, setStatus: (status?: any) => void) => void
+    isAuth: boolean
+}
+type MapStateTotPropsType = {
+    isAuth: boolean
+}
 
-const Login = () => {
+const Login = (props: LoginType) => {
     const initialValues: InitialValuesType = {
-        login: '',
+        email: '',
         password: '',
         rememberMe: false
     }
     const validationSchema = Yup.object({
-        login: Yup.string().required('Required'),
-        password: Yup.string().required('Required'),
+        email: Yup.string().required('Required').email('Invalid email format'),
+        password: Yup.string().required('Required').min(5, 'Minimum 5 symbols'),
     })
-    const onSubmit = (values: InitialValuesType) => {
-        console.log(values)
+    const onSubmit = (values: InitialValuesType, {setSubmitting, setStatus}: FormikHelpers<InitialValuesType>) => {
+        props.login(values.email, values.password, values.rememberMe, setStatus)
+        setSubmitting(false)
     }
+    if (props.isAuth) {
+        return <Redirect to={"/profile"}/>
+    }
+
     return (
-        <div>
+        <div className={s.formContainer}>
             <h1>LOG IN</h1>
             <Formik initialValues={initialValues}
                     validationSchema={validationSchema}
+                    validateOnBlur
                     onSubmit={onSubmit}>
-                <Form>
-                    <div>
-                        <Field placeholder={'login'} type={'text'} name={'login'} id={'login'}/>
-                        <div><ErrorMessage name={'login'}/></div>
-                    </div>
-                    <div>
-                        <Field placeholder={'password'} type={'text'} name={'password'} id={'password'}/>
-                        <div><ErrorMessage name={'password'}/></div>
-                    </div>
-                    <div>
-                        <Field type={'checkbox'} name={'rememberMe'} id={'rememberMe'}/>
-                        <label htmlFor={'rememberMe'}>remember me</label>
-                    </div>
-                    <div>
-                        <button type={'submit'}>Login</button>
-                    </div>
-                </Form>
+                {(formik: FormikProps<FormikValues>) => {
+                    const {isSubmitting, status} = formik
+                    return (
+                        <Form>
+                            <div>
+                                <FormControl control={'input'} name={'email'} placeholder={'email'}/>
+                            </div>
+                            <div>
+                                <FormControl control={'password'} name={'password'} placeholder={'password'}/>
+                            </div>
+                            <div style={{marginBottom: '8px'}}>
+                                <Field type={'checkbox'} name={'rememberMe'} id={'rememberMe'}/>
+                                <label htmlFor={'rememberMe'}>remember me</label>
+                            </div>
+                            <div>
+                                <button className={a.button} type={'submit'} disabled={isSubmitting}>
+                                    Login
+                                </button>
+                            </div>
+                            {status
+                                ? <span style={{color: 'red'}}>Your email or password is incorrect</span>
+                                : <span style={{margin: '8px', width: '300px'}}></span>}
+                        </Form>
+                    )
+                }}
             </Formik>
         </div>
     )
 }
 
-export default Login;
+const mapStateToProps = (state: AppRootStateType): MapStateTotPropsType => {
+    return {isAuth: state.auth.isAuth}
+}
+export default connect(mapStateToProps, {login})(Login);

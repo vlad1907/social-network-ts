@@ -17,11 +17,24 @@
 }
 
 .messages {
-    padding: 10px;
+    margin-bottom: 20px;
 }
 
 .messages .message {
     color:white;
+}
+
+.item {
+    margin: 20px;
+}
+
+.messageBlock {
+    width: 500px;
+    height: 100%;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 

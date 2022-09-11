@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {followUsers, getUsers, unFollowUsers, UserType} from '../../redux/users-reducer';
-import {AppStateType} from '../../redux/redux-store';
+import {AppRootStateType} from '../../redux/store';
 import {Users} from './Users';
 import {Preloader} from '../common/Preloader/Preloader';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
@@ -83,7 +83,7 @@ class UsersContainer extends React.Component<UsersPropsType, UsersResponseType> 
     }
 }
 
-let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,

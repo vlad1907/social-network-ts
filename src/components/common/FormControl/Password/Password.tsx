@@ -1,8 +1,8 @@
 import React from 'react';
 import {ErrorMessage, Field, FormikValues} from "formik";
-import s from './Input.module.css'
+import s from '../Input/Input.module.css'
 
-export const Input = (props: FormikValues) => {
+const Password = (props: FormikValues) => {
     const {name, placeholder} = props
     return (
         <div className={s.inputBlock}>
@@ -11,7 +11,7 @@ export const Input = (props: FormikValues) => {
                     return <input className={`${s.input} ${touched && error ? s.invalid : ''}`}
                                   {...field}
                                   placeholder={placeholder}
-                                  type={'text'}/>
+                                  type={'password'}/>
                 }}
             </Field>
             <ErrorMessage name={name}>
@@ -20,3 +20,5 @@ export const Input = (props: FormikValues) => {
         </div>
     );
 };
+
+export default Password;
