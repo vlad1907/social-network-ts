@@ -7,6 +7,12 @@
 }
 .loginBlock {
     float: right;
+    width: 250px;
+    margin-top: 20px
+}
+.login {
+    display: flex;
+    justify-content: space-between;
 }
 .loginBlock a {
     color: white;
