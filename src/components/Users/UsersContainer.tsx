@@ -30,20 +30,6 @@ type MapDispatchToPropsType = {
 
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-/*type UsersCType = {
-    users: UserType[]
-    follow: (id: number) => void
-    unfollow: (id: number) => void
-    setUsers: (users: UserType[]) => void
-    setCurrentPage: (pageNumber: number) => void
-    setTotalUsersCount: (totalCount: number) => void
-    toggleIsFetching: (isFetching: boolean) => void
-    totalUsersCount: number
-    pageSize: number
-    currentPage: number
-    isFetching: boolean
-
-}*/
 type UsersResponseType = {
     items: UserType[]
     totalCount: number
@@ -53,23 +39,14 @@ type UsersResponseType = {
 class UsersContainer extends React.Component<UsersPropsType, UsersResponseType> {
 
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
-        /* this.props.toggleIsFetching(true)
-         usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-             this.props.toggleIsFetching(false);
-             this.props.setUsers(data.items);
-             this.props.setTotalUsersCount(data.totalCount);
-         });*/
+        const {currentPage, pageSize, getUsers} = this.props
+        getUsers(currentPage, pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.getUsers(pageNumber, this.props.pageSize)
-        /* this.props.setCurrentPage(pageNumber)
-         this.props.toggleIsFetching(true)
-         usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
-             this.props.toggleIsFetching(false);
-             this.props.setUsers(data.items);
-         });*/
+        const {pageSize, getUsers} = this.props
+        getUsers(pageNumber, pageSize)
+
     }
 
     render() {

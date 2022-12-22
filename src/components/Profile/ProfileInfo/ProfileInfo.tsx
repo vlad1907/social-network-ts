@@ -10,8 +10,8 @@ type ProfileInfoType = {
     updateUserStatus: (status: string) => void
 }
 
-export const ProfileInfo = (props: ProfileInfoType) => {
-    if (!props.profile) {
+export const ProfileInfo = ({profile, status, updateUserStatus}: ProfileInfoType) => {
+    if (!profile) {
         return <Preloader/>
     }
 
@@ -22,8 +22,8 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                 alt={'ava'}/>
             </div>
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large} alt=""/>
-                <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
+                <img src={profile.photos.large} alt=""/>
+                <ProfileStatus status={status} updateUserStatus={updateUserStatus}/>
             </div>
         </div>
     );

@@ -2,7 +2,7 @@ import {AppThunk} from './store';
 import {getAuthData} from './auth-reducer';
 
 
-const INITIALIZED_SUCCESS = 'INITIALIZED-SUCCESS';
+const INITIALIZED_SUCCESS = 'app/INITIALIZED-SUCCESS';
 
 type AppReducerType = {
     initialized: boolean
@@ -27,11 +27,10 @@ export type AppReducerActionType = ReturnType<typeof initializedSuccessAC>
 export const initializedSuccessAC = () => ({type: INITIALIZED_SUCCESS} as const);
 
 // THUNK CREATORS
-export const initializeApp = (): AppThunk => (dispatch) => {
+export const initializeApp = (): AppThunk => async (dispatch) => {
     let promise = dispatch(getAuthData());
-    Promise.all([promise]).then(() => {
-        dispatch(initializedSuccessAC());
-    })
+    await Promise.all([promise])
+    dispatch(initializedSuccessAC());
 }
 
 export default appReducer;

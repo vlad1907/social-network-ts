@@ -1,7 +1,7 @@
 import {authAPI} from "../api/api";
 import {AppThunk} from './store';
 
-export const SET_USER_DATA = 'SET-USER-DATA';
+export const SET_USER_DATA = 'auth/SET-USER-DATA';
 
 export type AuthDataType = {
     id: number | null
@@ -52,13 +52,12 @@ export const setUserDataAC = (id: number | null, email: string | null, login: st
     data: {id, email, login, isAuth}
 } as const);
 
-export const getAuthData = (): AppThunk => (dispatch) => {
-    return authAPI.me().then((res) => {
-        if (res.data.resultCode === 0) {
-            let {id, login, email} = res.data.data
-            dispatch(setUserDataAC(id, email, login, true))
-        }
-    });
+export const getAuthData = (): AppThunk => async (dispatch) => {
+    const res = await authAPI.me()
+    if (res.data.resultCode === 0) {
+        let {id, login, email} = res.data.data
+        dispatch(setUserDataAC(id, email, login, true))
+    }
 }
 
 export const login = (email: string, password: string, rememberMe: boolean, setStatus: (status?: any) => void): AppThunk => (dispatch) => {
