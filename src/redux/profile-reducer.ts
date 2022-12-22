@@ -39,6 +39,7 @@ type ProfilePageTypeActionsTypes =
     | ReturnType<typeof addPostAC>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
+    | ReturnType<typeof deletePostAC>
 
 let initialState = {
     posts: [
@@ -63,6 +64,9 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Pr
                 posts: [...state.posts, newPost],
             }
         }
+        case 'DELETE-POST': {
+            return {...state, posts: state.posts.filter(p => p.id !== action.postId)}
+        }
         case 'SET-USER-PROFILE': {
             return {
                 ...state,
@@ -82,6 +86,7 @@ export const addPostAC = (postMessage: string) => {
         type: 'ADD-POST', postMessage
     } as const
 }
+export const deletePostAC = (postId: number) => ({type: 'DELETE-POST', postId} as const)
 export const setUserProfile = (profile: ProfileResponseType) => {
     return {
         type: 'SET-USER-PROFILE', profile
