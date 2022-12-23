@@ -16,9 +16,9 @@ export type DialogType = {
 
 type DialogPagePropsType = {
     dialogsPage: DialogPageType
-    newMessage: string
+    // newMessage: string
     sendMessage: (newMessage: string) => void
-    updateDialogsText: (value: string) => void
+    // updateDialogsText: (value: string) => void
     isAuth: boolean
 }
 

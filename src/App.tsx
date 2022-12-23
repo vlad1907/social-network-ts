@@ -2,16 +2,21 @@ import React from 'react';
 import './App.css';
 import {Route, Switch, withRouter} from "react-router-dom";
 import {Navbar} from "./components/Navbar/Navbar";
-import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from "./components/Header/HeaderContainer";
 import UsersContainer from './components/Users/UsersContainer';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
 import Login from './components/Login/Login';
 import {Preloader} from './components/common/Preloader/Preloader';
 import {AppRootStateType} from './redux/store';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {initializeApp} from './redux/app-reducer';
+import withSuspense from "./hoc/withSuspense";
+
+const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"));
+const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"));
+
+const SuspendedProfile = withSuspense(ProfileContainer);
+const SuspendedDialogues = withSuspense(DialogsContainer);
 
 type MapDispatchToPropsType = {
     initializeApp: () => void
@@ -30,15 +35,14 @@ class App extends React.Component<AppType> {
         if (!this.props.initialized) {
             return <Preloader/>
         }
-
         return (
             <div className='app-wrapper'>
                 <HeaderContainer/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Switch>
-                        <Route path="/dialogs/" render={() => <DialogsContainer/>}/>
-                        <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
+                        <Route path="/dialogs/" render={() => <SuspendedDialogues/>}/>
+                        <Route path="/profile/:userId?" render={() => <SuspendedProfile/>}/>
                         <Route path="/users" render={() => <UsersContainer/>}/>
                         <Route path="/login" render={() => <Login/>}/>
                     </Switch>
