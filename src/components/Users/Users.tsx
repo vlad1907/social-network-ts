@@ -44,7 +44,7 @@ export const Users = (props: UsersPropsType) => {
             </div>
             <div className={s.paginator}>
                 <Paginator
-                    totalUsersCount={totalUsersCount}
+                    totalItemsCount={totalUsersCount}
                     pageSize={pageSize}
                     currentPage={currentPage}
                     callbackOnPage={onPageChanged}

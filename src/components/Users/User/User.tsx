@@ -3,6 +3,7 @@ import s from "./User.module.css";
 import userPhoto from "../../../assets/images/user.png";
 import {UserType} from "../../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
+import b from '../../common/Button/Button.module.css'
 
 
 type UserComponentType = {
@@ -19,20 +20,19 @@ const User = ({user, followingInProgress, followUsers, unFollowUsers}: UserCompo
                 <NavLink to={'/profile/' + user.id}>
                     <img src={user.photos.small !== null ? user.photos.small : userPhoto} alt={'avatar'}/>
                 </NavLink>
+                <div className={s.userName}>
+                    {user.name}
+                </div>
                 {user.followed
                     ? <button
+                        className={b.button}
                         disabled={followingInProgress.some(id => id === user.id)}
                         onClick={() => unFollowUsers(user.id)}>unfollow</button>
                     : <button
+                        className={b.button}
                         disabled={followingInProgress.some(id => id === user.id)}
                         onClick={() => followUsers(user.id)}>follow</button>
                 }
-            </div>
-            <div className={s.userBlock}>
-                        <span className={s.nameStatus}>
-                            <div>{user.name}</div>
-                            <div>{user.status}</div>
-                        </span>
             </div>
         </div>
     );
