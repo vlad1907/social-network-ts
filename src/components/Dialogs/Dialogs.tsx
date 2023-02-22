@@ -1,24 +1,15 @@
 import React from 'react';
 import s from './Dialogs.module.css'
-import {Message, MessageType} from "./Message/Message";
-import {DialogItem} from "./DIalogItem/DialogItem";
+import {Message} from "./Message/Message";
+import {DialogItem} from "./DialogItem/DialogItem";
 import {Redirect} from "react-router-dom";
 import {AddMessageForm} from './Message/AddMessageForm';
+import {DialogPageType} from '../../redux/dialogs-reducer';
 
-export type DialogPageType = {
-    messages: Array<MessageType>
-    dialogs: Array<DialogType>
-}
-export type DialogType = {
-    id: number
-    name: string
-}
 
 type DialogPagePropsType = {
     dialogsPage: DialogPageType
-    // newMessage: string
     sendMessage: (newMessage: string) => void
-    // updateDialogsText: (value: string) => void
     isAuth: boolean
 }
 
@@ -27,7 +18,7 @@ export const Dialogs = (props: DialogPagePropsType) => {
     let messagesElements = props.dialogsPage.messages.map((message, index) => <Message message={message.message}
                                                                                        key={index} id={message.id}/>);
 
-    let addNewMessage  = (newMessage: string) => {
+    let addNewMessage = (newMessage: string) => {
         props.sendMessage(newMessage)
     }
 
@@ -38,9 +29,11 @@ export const Dialogs = (props: DialogPagePropsType) => {
             <div className={s.dialogsItem}>
                 {dialogElements}
             </div>
-            <div className={s.messages}>
-                <div>{messagesElements}</div>
-              <AddMessageForm sendMessage={addNewMessage}/>
+            <div className={s.messageBlock}>
+                <div className={s.messages}>
+                    <div className={s.item}>{messagesElements}</div>
+                </div>
+                <AddMessageForm sendMessage={addNewMessage}/>
             </div>
         </div>
 

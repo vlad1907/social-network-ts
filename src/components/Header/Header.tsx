@@ -13,10 +13,16 @@ export const Header = (props: HeaderType) => {
         <header className={s.header}>
             <img src="https://www.logo.wine/a/logo/Babylon.js/Babylon.js-Logo.wine.svg" alt={"logo"}/>
             <div className={s.loginBlock}>
-                {props.isAuth ? <div  className={s.login}>
-                    <div>Welcome, {props.login} </div>
-                    <button onClick={props.logout}>Log out</button>
-                </div> : <NavLink to={'/Login'}>Login</NavLink>}
+                {
+                    props.isAuth
+                        ? <div className={s.login}>
+                            <div>Welcome, {props.login} </div>
+                            <button onClick={props.logout}>Log out</button>
+                        </div>
+                        : <div className={s.loginButtonWrapper}>
+                            <NavLink className={s.loginButton} to={'/Login'}>Login</NavLink>
+                        </div>
+                }
             </div>
         </header>
     );

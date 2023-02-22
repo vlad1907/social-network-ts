@@ -1,4 +1,8 @@
-.background img {
-    max-width: 1200px;
-    max-height: 420px;
+.aboutMeBlock {
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.contactsBlock {
+    margin-left: 30px;
 }

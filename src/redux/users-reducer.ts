@@ -48,15 +48,6 @@ let initialState: UsersStateType = {
     followingInProgress: []
 }
 
-export type UserReducerActionType =
-    ReturnType<typeof follow>
-    | ReturnType<typeof unfollow>
-    | ReturnType<typeof setUsers>
-    | ReturnType<typeof setCurrentPage>
-    | ReturnType<typeof setTotalUsersCount>
-    | ReturnType<typeof toggleIsFetching>
-    | ReturnType<typeof toggleFollowingProgress>
-
 export const usersReducer = (state = initialState, action: UserReducerActionType): UsersStateType => {
 
     switch (action.type) {
@@ -112,6 +103,17 @@ export const usersReducer = (state = initialState, action: UserReducerActionType
     }
 }
 
+// ACTION TYPE
+export type UserReducerActionType =
+    ReturnType<typeof follow>
+    | ReturnType<typeof unfollow>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setTotalUsersCount>
+    | ReturnType<typeof toggleIsFetching>
+    | ReturnType<typeof toggleFollowingProgress>
+
+// ACTION CREATORS
 export const follow = (id: number) => {
     return {type: 'FOLLOW', userId: id} as const
 }
@@ -134,6 +136,7 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
     return {type: 'TOGGLE-IS-FOLLOWING-PROGRESS', isFetching, userId} as const
 }
 
+// THUNK CREATORS
 export const getUsers = (page: number, pageSize: number) => async (dispatch: Dispatch) => {
     dispatch(toggleIsFetching(true));
     dispatch(setCurrentPage(page));

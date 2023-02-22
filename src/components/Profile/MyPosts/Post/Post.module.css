@@ -1,4 +1,22 @@
+.item {
+    color: #8c91b6;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.postBlock {
+    display: flex;
+}
+
 .item img {
-    max-width: 50px;
-    border-radius: 20px;
+    width: 40px;
+}
+
+.text {
+    font-size: medium;
+    margin-left: 20px;
+}
+
+.likes {
+    margin-top: 10px;
 }

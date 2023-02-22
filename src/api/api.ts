@@ -1,12 +1,12 @@
 import axios, {AxiosResponse} from "axios";
 import {UsersFollowResponseType, UsersResponseType} from "../redux/users-reducer";
-import {ProfileResponseType} from "../redux/profile-reducer";
+import {ProfileType} from '../redux/profile-reducer';
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     withCredentials: true,
     headers: {
-        "API-KEY": "b6ec5262-3a7f-4613-ab32-e5f165a7a372"
+        "API-KEY": "f6e09271-9951-4ca7-8fbf-c73bc4098a4f"
     }
 })
 
@@ -51,14 +51,48 @@ export const authAPI = {
 
 export const profileAPI = {
     showProfile(userId: number) {
-        return instance.get(`profile/${userId}`).then((response: AxiosResponse<ProfileResponseType>) => {
-            return response.data;
-        });
+        return instance.get(`profile/${userId}`)
     },
     getStatus(userId: number) {
         return instance.get(`profile/status/${userId}`)
     },
     updateStatus(status: string) {
         return instance.put(`profile/status`, {status})
+    },
+    savePhotoSuccess (photo: File) {
+        const formData = new FormData();
+        formData.append('image', photo)
+        return instance.put<SavePhotoResponseType>(`/profile/photo`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+    },
+    saveProfile (profileData: ProfileType) {
+        return instance.put<SaveProfileResponseType>('profile', profileData)
     }
+}
+
+export const securityAPI = {
+    getCaptcha() {
+        return instance.get('security/get-captcha-url', {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+    }
+}
+
+export type SavePhotoResponseType = {
+    resultCode: number
+    messages: Array<string>,
+    data: {
+        small: string
+        large: string
+    }
+}
+export type SaveProfileResponseType = {
+    resultCode: number
+    messages: Array<string>
+    data: ProfileType
 }

@@ -1,18 +1,22 @@
 import {MessageType} from '../components/Dialogs/Message/Message';
-import {DialogType} from '../components/Dialogs/Dialogs';
 
-type DialogPageType = {
+export type DialogPageType = {
     messages: Array<MessageType>
     dialogs: Array<DialogType>
 }
 
-type DialogPageActionsTypes = ReturnType<typeof sendMessageAC>
+export type DialogType = {
+    id: number
+    name: string
+}
+
+export type DialogPageActionsTypes = ReturnType<typeof sendMessageAC>
 
 let initialState = {
     dialogs: [
         {id: 1, name: 'Vlad'},
-        {id: 2, name: 'Leontiev'},
-        {id: 3, name: 'Bevkin'}
+        {id: 2, name: 'Leon'},
+        {id: 3, name: 'Chris'}
     ],
     messages: [
         {id: 1, message: "Hi"},

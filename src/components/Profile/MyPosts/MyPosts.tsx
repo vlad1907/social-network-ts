@@ -18,16 +18,19 @@ export const MyPosts = (props: MyPostsPropsType) => {
 
     let addPost = (newPost: string) => {
         props.onAddPost(newPost)
-    } 
+    }
 
-    return (<div className={s.postsBlock}>
-            <h3>My posts</h3>
-            <AddPostForm addPost={addPost}/>
+    return (
+        <div className={s.postsBlock}>
+            <h3 style={{color: '#8c91b6'}}>My posts</h3>
+            <div className={s.textareaWrapper}>
+                <AddPostForm addPost={addPost}/>
+            </div>
             <div className={s.posts}>
                 {postsElements}
             </div>
         </div>
-    );
+    )
 
 };
 

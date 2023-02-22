@@ -1,5 +1,4 @@
-import {addPostAC, deletePostAC, profileReducer} from "./profile-reducer";
-
+import {addPostAC, deletePostAC, profileReducer} from './profile-reducer';
 
 let state = {
     posts: [
@@ -9,7 +8,8 @@ let state = {
         {id: 4, message: "It's my first post", likesCount: 14}
     ],
     profile: null,
-    status: ''
+    status: '',
+    photos: {small: null, large: null}
 }
 
 test('new post should be added', () => {

@@ -1,14 +1,20 @@
 .header {
     grid-area: h;
-    background-color: aqua;
+    background-color: #441c24;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 .header img {
-    width:40px;
+    width: 60px;
+    border-radius: 50%;
+    margin-left: 15px;
+    margin-top: 5px;
 }
 .loginBlock {
     float: right;
     width: 250px;
-    margin-top: 20px
+    margin-top: 20px;
+    margin-right: 20px;
 }
 .login {
     display: flex;
@@ -16,4 +22,17 @@
 }
 .loginBlock a {
     color: white;
+}
+.loginButtonWrapper {
+    background-color: #28436a;
+    padding: 5px;
+    width: 60px;
+    text-align: center;
+    border-radius: 2px;
+}
+
+
+.loginButton {
+    text-decoration: none;
+    color: aliceblue;
 }

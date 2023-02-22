@@ -1,7 +1,6 @@
-import {createSelector} from "reselect";
-import {AppRootStateType} from "./store";
-import {UserType} from "./users-reducer";
-
+import {AppRootStateType} from './store';
+import {createSelector} from 'reselect';
+import {UserType} from './users-reducer';
 
 const getUsers = (state: AppRootStateType) => {
     return state.usersPage.users;

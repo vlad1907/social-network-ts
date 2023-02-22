@@ -3,12 +3,12 @@ import {Header} from './Header';
 import {connect} from 'react-redux';
 import {AuthResponseType, logout} from '../../redux/auth-reducer';
 import {AppRootStateType} from "../../redux/store";
-import {ProfileResponseType} from '../../redux/profile-reducer';
+import {ProfileType} from '../../redux/profile-reducer';
 
 type MapStateToPropsType = {
     isAuth: boolean
     login: string | null
-    profile: ProfileResponseType | null
+    profile: ProfileType | null
 }
 
 type MapDispatchToPropsType = {

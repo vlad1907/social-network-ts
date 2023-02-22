@@ -5,38 +5,44 @@ import {Redirect} from 'react-router-dom';
 import s from './Login.module.css'
 import a from '../common/Button/Button.module.css'
 import {FormControl} from '../common/FormControl/FormControl';
-import {connect} from 'react-redux';
-import {login} from '../../redux/auth-reducer';
+import {connect, useDispatch} from 'react-redux';
+import {getCaptchaUrl, login} from '../../redux/auth-reducer';
 import {AppRootStateType} from '../../redux/store';
 
 type InitialValuesType = {
     email: string
     password: string
     rememberMe: boolean
+    captcha: string
 }
 type LoginType = {
-    login: (email: string, password: string, rememberMe: boolean, setStatus: (status?: any) => void) => void
+    login: (email: string, password: string, rememberMe: boolean, captcha: string | null, setStatus: (status?: any) => void) => void
     isAuth: boolean
+    captchaUrl: string | null
 }
 type MapStateTotPropsType = {
     isAuth: boolean
+    captchaUrl: string | null
 }
 
-const Login = (props: LoginType) => {
+const Login = ({login, isAuth, captchaUrl}: LoginType) => {
+    const dispatch = useDispatch();
     const initialValues: InitialValuesType = {
-        email: '',
-        password: '',
-        rememberMe: false
+        email: 'free@samuraijs.com',
+        password: 'free',
+        rememberMe: false,
+        captcha: ''
     }
     const validationSchema = Yup.object({
         email: Yup.string().required('Required').email('Invalid email format'),
         password: Yup.string().required('Required').min(5, 'Minimum 5 symbols'),
     })
     const onSubmit = (values: InitialValuesType, {setSubmitting, setStatus}: FormikHelpers<InitialValuesType>) => {
-        props.login(values.email, values.password, values.rememberMe, setStatus)
+        login(values.email, values.password, values.rememberMe, values.captcha, setStatus)
         setSubmitting(false)
+        dispatch(getCaptchaUrl(''))
     }
-    if (props.isAuth) {
+    if (isAuth) {
         return <Redirect to={"/profile"}/>
     }
 
@@ -52,6 +58,17 @@ const Login = (props: LoginType) => {
                     return (
                         <Form>
                             <div>
+                                <p>{'To log in get registered '}
+                                    <a style={{color: 'white'}} href={'https://social-network.samuraijs.com/'}
+                                       target={'_blank'}
+                                       rel="noopener noreferrer">here
+                                    </a>
+                                </p>
+                                <p>or use common test account credentials:</p>
+                                <p>Email: free@samuraijs.com</p>
+                                <p>Password: free</p>
+                            </div>
+                            <div>
                                 <FormControl control={'input'} name={'email'} placeholder={'email'}/>
                             </div>
                             <div>
@@ -59,7 +76,15 @@ const Login = (props: LoginType) => {
                             </div>
                             <div style={{marginBottom: '8px'}}>
                                 <Field type={'checkbox'} name={'rememberMe'} id={'rememberMe'}/>
-                                <label htmlFor={'rememberMe'}>remember me</label>
+                                <label htmlFor={'rememberMe'}> remember me</label>
+                            </div>
+                            <div className={s.captchaBlock}>
+                                {captchaUrl && <img className={s.captchaImg} src={captchaUrl} alt={'security'}/>}
+                                {captchaUrl &&
+                                    <div>
+                                        <FormControl control={'input'} name={'captcha'} placeholder={''}/>
+                                    </div>
+                                }
                             </div>
                             <div>
                                 <button className={a.button} type={'submit'} disabled={isSubmitting}>
@@ -78,6 +103,6 @@ const Login = (props: LoginType) => {
 }
 
 const mapStateToProps = (state: AppRootStateType): MapStateTotPropsType => {
-    return {isAuth: state.auth.isAuth}
+    return {isAuth: state.auth.isAuth, captchaUrl: state.auth.captchaUrl}
 }
 export default connect(mapStateToProps, {login})(Login);
